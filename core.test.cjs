@@ -1,0 +1,7 @@
+const {test}=require('node:test');
+const a=require('node:assert/strict'),C=require('../core.js');
+test('dates et échéances calendaires',()=>{a.equal(C.validDate('2026-13-01'),false);a.equal(C.validDate('2026-02-29'),false);a.equal(C.validDate('2028-02-29'),true);a.equal(C.addMonths('2026-11-30',3),'2027-02-28');a.equal(C.addMonths('2027-11-30',3),'2028-02-29');});
+test('complétude : échéances futures et non-applicables exclues',()=>{a.deepEqual(C.progress([{Statut:'Vérifié'},{Statut:'À faire',Echeance:'2026-09-01'},{Statut:'À faire',Echeance:'2027-01-01'},{Statut:'Non applicable'}],'2026-09-12'),{done:1,total:2,percent:50,future:1,late:1});a.equal(C.progress([]).percent,null);});
+test('validation des preuves et des sessions',()=>{a.throws(()=>C.validateTask({Statut:'Vérifié'}));a.throws(()=>C.validateTask({Statut:'Non applicable',Note:'Motif'}));C.validateTask({Statut:'Vérifié',Controle_par:'Test',Note:'Compte rendu contrôlé'});a.throws(()=>C.validateSession({Titre:'Test',Date_debut:'2026-11-02',Date_fin:'2026-11-01'}));});
+test('CSV français, guillemets, retours ligne et erreurs',()=>{const parsed=C.parseCSV('\uFEFFID_session;Titre\r\n42;"Titre; avec ""guillemets""\nSuite"');a.equal(parsed.data[0][1],'Titre; avec "guillemets"\nSuite');a.throws(()=>C.parseCSV('a;a\n1;2'));a.throws(()=>C.parseCSV('a;b\n1'));a.throws(()=>C.parseCSV('a;b\n1;"x'));});
+test('échappement HTML, liens et export tableur',()=>{a.equal(C.safeURL('javascript:alert(1)'),'');a.equal(C.esc('<script>'),'&lt;script&gt;');a.match(C.csv(['a'],[['=1+1']]),/' =1\+1/);});
