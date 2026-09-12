@@ -1,0 +1,198 @@
+{
+  "Q_Sessions": [
+    {
+      "id": "Titre",
+      "type": "Text"
+    },
+    {
+      "id": "ID_notice",
+      "type": "Text"
+    },
+    {
+      "id": "ID_session",
+      "type": "Text"
+    },
+    {
+      "id": "Reference_EAFC",
+      "type": "Text"
+    },
+    {
+      "id": "Organisation",
+      "type": "Text"
+    },
+    {
+      "id": "Atelier",
+      "type": "Text"
+    },
+    {
+      "id": "Cadre",
+      "type": "Text"
+    },
+    {
+      "id": "Commanditaire",
+      "type": "Text"
+    },
+    {
+      "id": "Financeur",
+      "type": "Text"
+    },
+    {
+      "id": "Formateurs",
+      "type": "Text"
+    },
+    {
+      "id": "Gestionnaire",
+      "type": "Text"
+    },
+    {
+      "id": "Date_debut",
+      "type": "Text"
+    },
+    {
+      "id": "Date_fin",
+      "type": "Text"
+    },
+    {
+      "id": "Horaires",
+      "type": "Text"
+    },
+    {
+      "id": "Duree",
+      "type": "Numeric"
+    },
+    {
+      "id": "Lieu",
+      "type": "Text"
+    },
+    {
+      "id": "Public",
+      "type": "Text"
+    },
+    {
+      "id": "Prerequis",
+      "type": "Text"
+    },
+    {
+      "id": "Besoins",
+      "type": "Text"
+    },
+    {
+      "id": "Contenu",
+      "type": "Text"
+    },
+    {
+      "id": "Methodes",
+      "type": "Text"
+    },
+    {
+      "id": "Accompagnement",
+      "type": "Text"
+    },
+    {
+      "id": "Accessibilite",
+      "type": "Text"
+    },
+    {
+      "id": "Contact",
+      "type": "Text"
+    },
+    {
+      "id": "Lien_dossier",
+      "type": "Text"
+    },
+    {
+      "id": "Notes",
+      "type": "Text"
+    }
+  ],
+  "Q_Objectifs": [
+    {
+      "id": "Session",
+      "type": "Ref:Q_Sessions"
+    },
+    {
+      "id": "Ordre",
+      "type": "Numeric"
+    },
+    {
+      "id": "Objectif",
+      "type": "Text"
+    },
+    {
+      "id": "Evaluation",
+      "type": "Text"
+    }
+  ],
+  "Q_Suivi": [
+    {
+      "id": "Session",
+      "type": "Ref:Q_Sessions"
+    },
+    {
+      "id": "Code",
+      "type": "Text"
+    },
+    {
+      "id": "Etape",
+      "type": "Text"
+    },
+    {
+      "id": "Libelle",
+      "type": "Text"
+    },
+    {
+      "id": "Indicateurs",
+      "type": "Text"
+    },
+    {
+      "id": "Statut",
+      "type": "Text"
+    },
+    {
+      "id": "Echeance",
+      "type": "Text"
+    },
+    {
+      "id": "Responsable",
+      "type": "Text"
+    },
+    {
+      "id": "Lien",
+      "type": "Text"
+    },
+    {
+      "id": "Note",
+      "type": "Text"
+    },
+    {
+      "id": "Controle_par",
+      "type": "Text"
+    },
+    {
+      "id": "Modifie_le",
+      "type": "Text"
+    }
+  ],
+  "Q_Journal": [
+    {
+      "id": "Session",
+      "type": "Ref:Q_Sessions"
+    },
+    {
+      "id": "Action",
+      "type": "Text"
+    },
+    {
+      "id": "Objet",
+      "type": "Text"
+    },
+    {
+      "id": "Detail",
+      "type": "Text"
+    },
+    {
+      "id": "Date",
+      "type": "Text"
+    }
+  ]
+}
