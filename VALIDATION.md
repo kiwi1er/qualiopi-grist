@@ -1,3 +1,7 @@
+## Mise à jour 0.2.1
+
+Huit tests Node réussis. Tests Chromium : persistance du modèle et des compléments après rechargement, génération Word sans nouvelle sélection du modèle, récupération depuis les seules tables dans un contexte neuf, stockage via API Grist simulée en iframe et refus d’écriture. L’essai réel DINUM/Safari reste à réaliser. Voir MISE_A_JOUR_V021.md.
+
 # Validation 0.2 — 13 septembre 2026
 
 ## Vérifications réalisées

@@ -1,3 +1,5 @@
+> **Mise à jour 0.2.1 :** le modèle programme et les compléments peuvent désormais être enregistrés dans le document Grist. Voir [les instructions](MISE_A_JOUR_V021.md). Les indications antérieures de stockage uniquement en mémoire sont remplacées par cette mise à jour.
+
 # Atelier Qualité — Widget Grist 0.2
 
 Widget de suivi de sessions, objectifs et preuves. Les imports Noticia et les dépôts SharePoint sont manuels. Les données sont conservées dans votre document Grist.
