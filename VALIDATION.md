@@ -1,3 +1,29 @@
+# Validation 0.2 — 13 septembre 2026
+
+## Vérifications réalisées
+
+- Huit tests Node réussis, incluant les cinq tests de logique V1 et trois tests Word. Le test nécessitant le vrai modèle a été exécuté avec QUALIOPI_TEMPLATE.
+- Scénario navigateur Grist simulé réussi : installation, écritures, preuves, import sans écrasement, refus de droits, export de l’index HTML, démonstration persistante et objectifs.
+- Nouveau scénario navigateur Word réussi : rejet d’un faux modèle, chargement local, téléchargement DOCX, caractères spéciaux, exclusion des notes, conservation des compléments entre onglets et affichage mobile sans débordement horizontal. Aucune requête externe observée pendant ce scénario de démonstration.
+- Maître de référence relu sur ses deux pages. Modèle préparé relu sur ses deux pages. Programme court relu sur deux pages ; programme long avec neuf objectifs sur trois pages, sans troncature.
+- Images, styles, en-têtes, pieds, relations, numérotation et autres parties non éditables comparés octet par octet au maître. Seuls document.xml et le réglage updateFields changent lors de la préparation ; seule document.xml change pendant la fusion dans le navigateur.
+- Le code et les fichiers publiés sur origin/main ont été consultés via git fetch, sans écriture distante. Aucun push, commit local ou déploiement automatique de la 0.2.
+- grist-pilotage-personnel n’a pas été consulté ni modifié.
+
+## Essais utilisateurs déjà confirmés sur la 0.1
+
+Le 12 septembre, Alexandre a confirmé le déploiement GitHub Pages, l’installation des tables, le chargement de l’exemple et la conservation du titre après rechargement dans grist.numerique.gouv.fr. Le 13 septembre, il a indiqué que le publipostage fonctionnait, mais ne respectait pas le maître. La 0.2 traite ce dernier point pour le programme stagiaire.
+
+## Reste à vérifier après téléversement
+
+Chargement du modèle et téléchargement Word dans la vraie iframe Grist, ouverture dans Microsoft Word sur le poste utilisateur, actualisation des champs de page, export PDF et dépôt SharePoint. Les contrôles visuels locaux utilisent LibreOffice fourni ; ils ne prouvent pas un rendu identique au pixel près dans toutes les versions de Word et avec toutes les polices. Les textes longs peuvent augmenter le nombre de pages.
+
+Les autres documents ne sont pas encore raccordés au moteur. L’inventaire local liste les versions trouvées et les données supplémentaires nécessaires.
+
+---
+
+## Historique de la première préparation
+
 # Validation de la reprise — 12 septembre 2026
 
 ## Résultats exécutés

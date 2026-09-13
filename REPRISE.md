@@ -1,5 +1,7 @@
 # Reprise du prototype
 
+**Mise à jour du 13/09/2026 :** lire d’abord [MISE_A_JOUR_V02.md](MISE_A_JOUR_V02.md). Le programme HTML générique est remplacé par le programme Word issu du maître local ; l’index reste en HTML. Alexandre a confirmé l’installation et la persistance après rechargement dans Grist. La publication de la 0.2 reste manuelle.
+
 Le dépôt `kiwi1er/qualiopi-grist` a été cloné à partir du commit `cf93de2` (README seul). Les fichiers de `qualiopi-widget.zip` ont été intégrés à sa racine. Ce projet est indépendant de `grist-pilotage-personnel`.
 
 L'analyse de septembre 2026 décrit une cible plus large que cette V1. Le périmètre conservé est : fiche session, objectifs et modalités d'évaluation, vingt étapes de suivi, liens de preuves, journal, import manuel CSV, programme et index documentaire HTML imprimables. Noticia reste la source des imports manuels ; les documents sont téléchargés puis déposés manuellement dans SharePoint.
@@ -56,7 +58,7 @@ Source : [configuration officielle GitHub Pages](https://docs.github.com/en/page
 4. Modifier le titre et enregistrer. Ajouter un troisième objectif et sa méthode d'évaluation.
 5. Tenter de vérifier une étape sans contrôleur : elle doit être refusée. Renseigner un contrôleur fictif et une description de preuve, puis enregistrer.
 6. Importer `exemple_import_sessions.csv` deux fois : le second import ne doit pas créer de doublon.
-7. Télécharger le programme HTML, l'ouvrir puis l'imprimer en PDF ; vérifier accents, objectifs, dates et sauts de page. Vérifier l'absence des notes internes dans le programme.
+7. Télécharger le programme Word à partir du modèle local, l'ouvrir puis l'exporter en PDF ; vérifier accents, objectifs, dates et sauts de page. Vérifier l'absence des notes internes dans le programme.
 8. Télécharger l'index et le suivi CSV, puis tester un dépôt manuel dans un dossier SharePoint de test.
 9. Recharger complètement le document Grist : les saisies doivent être conservées. Vérifier les quatre tables Q_Sessions, Q_Objectifs, Q_Suivi et Q_Journal.
 10. Noter l'instance, le navigateur, la date, les résultats et les éventuels messages d'erreur dans une copie locale de la recette, sans publier de liens privés.

@@ -1,13 +1,18 @@
 {
   "name": "qualiopi-grist",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Widget Grist de suivi des formations et des preuves Qualiopi",
   "scripts": {
-    "test": "node --test tests/core.test.cjs",
+    "test": "node --test tests/core.test.cjs tests/docx.test.cjs",
     "test:browser": "node tests/browser.test.cjs",
-    "test:all": "npm test && npm run test:browser"
+    "test:all": "npm test && npm run test:browser && npm run test:word",
+    "test:word": "node tests/docx.browser.test.cjs"
   },
-  "engines": { "node": ">=22" },
-  "devDependencies": { "playwright": "1.62.1" }
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
 }
