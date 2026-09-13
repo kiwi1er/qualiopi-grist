@@ -1,3 +1,7 @@
+## Version 0.3 — aperçu
+
+Tests Node (8) et deux suites navigateur réussis. Aperçu du DOCX rempli, logos, mise à jour à la saisie et masquage si champs manquants vérifiés. Capture inspectée visuellement. Aucun changement au moteur de génération Word. Validation réelle DINUM/Safari à effectuer.
+
 ## Mise à jour 0.2.1
 
 Huit tests Node réussis. Tests Chromium : persistance du modèle et des compléments après rechargement, génération Word sans nouvelle sélection du modèle, récupération depuis les seules tables dans un contexte neuf, stockage via API Grist simulée en iframe et refus d’écriture. L’essai réel DINUM/Safari reste à réaliser. Voir MISE_A_JOUR_V021.md.

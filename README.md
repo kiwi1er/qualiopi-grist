@@ -1,3 +1,5 @@
+> **Version 0.3 : aperçu du programme complété dans Grist.** Voir [la mise à jour](MISE_A_JOUR_V03.md). Le modèle enregistré est réutilisé ; la pagination finale reste à contrôler dans Word.
+
 > **Mise à jour 0.2.1 :** le modèle programme et les compléments peuvent désormais être enregistrés dans le document Grist. Voir [les instructions](MISE_A_JOUR_V021.md). Les indications antérieures de stockage uniquement en mémoire sont remplacées par cette mise à jour.
 
 # Atelier Qualité — Widget Grist 0.2

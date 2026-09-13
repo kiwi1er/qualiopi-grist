@@ -56,24 +56,47 @@ function wordDocumentsView(){
     <p class="hint">Cliquez sur Enregistrer les compléments pour les conserver dans Grist pour cette session. Le téléchargement les enregistre également. Les autres informations se modifient dans la fiche et les objectifs.</p>
     <p>Les mentions fixes, le référent handicap et les liens restent ceux du modèle du 15/10/2025. Vérifiez leur pertinence avant diffusion. Le champ Accessibilité de la fiche n’est pas ajouté au texte fixe de ce modèle.</p>
     <div class="actions"><button type="button" id="wordSave">Enregistrer les compléments</button><button type="submit" id="wordDownload" class="primary">Télécharger le programme Word</button></div>
-    <p class="hint">Les contenus longs peuvent augmenter le nombre de pages. Contrôlez la pagination dans Word avant d’enregistrer le PDF et de le déposer dans SharePoint.</p></form>`;
+    <p class="hint">Les contenus longs peuvent augmenter le nombre de pages. Contrôlez la pagination dans Word avant d’enregistrer le PDF et de le déposer dans SharePoint.</p></form>
+    <div class="card"><h2>3. Aperçu du programme complété</h2>
+    <p class="hint">L’aperçu reprend le Word rempli et se met à jour pendant la saisie. Les compléments ne sont enregistrés qu’avec les boutons ci-dessus. La pagination et certaines polices peuvent différer dans Word ; le fichier Word reste le document à diffuser.</p>
+    <p id="wordPreviewStatus" role="status">Préparation de l’aperçu…</p>
+    <iframe id="wordPreview" title="Aperçu du programme Canopé complété" sandbox="" hidden style="width:100%;height:850px;border:1px solid #dbe6e3;border-radius:8px;background:#edf2f1"></iframe></div>`;
+  let previewTimer,previewVersion=0;
+  const previewFrame=$('wordPreview'),previewStatus=$('wordPreviewStatus');
+  function updatePreview(){
+    const version=++previewVersion;
+    clearTimeout(previewTimer);previewFrame.hidden=true;previewFrame.removeAttribute('srcdoc');
+    previewStatus.textContent='Mise à jour de l’aperçu…';
+    previewTimer=setTimeout(async()=>{
+      if(!previewFrame.isConnected)return;
+      try{
+        if(!wordTemplate)throw Error('Choisissez le modèle pour afficher le programme complété.');
+        const values=QDocx.values(s,objectives(),Object.fromEntries(new FormData($('wordForm'))),C.today());
+        const bytes=await QDocx.generate(wordTemplate,values);
+        const html=await QPreview.html(bytes);
+        if(version!==previewVersion||!previewFrame.isConnected)return;
+        previewFrame.srcdoc=html;previewFrame.hidden=false;
+        previewStatus.textContent='Aperçu à jour — programme complété avec les données affichées.';
+      }catch(err){if(version===previewVersion&&previewFrame.isConnected)previewStatus.textContent='Aperçu indisponible : '+err.message;}
+    },350);
+  }
   $('showIndex').onclick=()=>{docKind='index';documentsView();};
   $('jsonExport').onclick=()=>download(filePrefix()+'.json',JSON.stringify({format:'qualiopi-widget-export-v1',date:new Date().toISOString(),session:s,objectifs:objectives(),suivi:tasks(),journal:db.Q_Journal.filter(r=>r.Session===sid)},null,2),'application/json');
   $('csvExport').onclick=()=>download(filePrefix()+'_suivi.csv',C.csv(['Etape','Libelle','Statut','Echeance','Responsable','Lien','Note','Controle_par'],tasks().map(t=>['Etape','Libelle','Statut','Echeance','Responsable','Lien','Note','Controle_par'].map(k=>t[k]))),'text/csv;charset=utf-8');
   $('wordTemplate').onchange=()=>{const file=$('wordTemplate').files[0];if(!file)return;run(async()=>{
     const candidate=await QDocx.load(await file.arrayBuffer());
     await saveWordRecord('Q_Modeles',r=>r.Nom==='programme-stagiaire',{Nom:'programme-stagiaire',Contenu:wordBase64(candidate.bytes)});
-    wordTemplate=candidate;
+    wordTemplate=candidate;updatePreview();
     $('wordModelState').textContent=wordTemplate.name+' — chargé et enregistré dans '+(demo?'la démonstration locale':'Grist');
   });};
   const form=$('wordForm');
   const controls=[...form.elements,$('wordTemplate')];
   controls.forEach(control=>control.disabled=true);
-  restoreWordStorage(sid,form).catch(err=>tell('Lecture des modèles et compléments impossible : '+err.message,true)).finally(()=>{if(form.isConnected)controls.forEach(control=>control.disabled=false);});
+  restoreWordStorage(sid,form).catch(err=>tell('Lecture des modèles et compléments impossible : '+err.message,true)).finally(()=>{if(form.isConnected){controls.forEach(control=>control.disabled=false);updatePreview();}});
   const saveExtras=async()=>{const extra=Object.fromEntries(new FormData(form));await saveWordRecord('Q_Documents',r=>r.Session===sid,{Session:sid,Complements:JSON.stringify(extra)});wordExtras.set(sid,extra);dirty=false;};
   $('wordSave').onclick=()=>run(async()=>{await saveExtras();tell('Compléments enregistrés dans '+(demo?'la démonstration locale.':'Grist.'));});
-  form.addEventListener('input',()=>{dirty=true;wordExtras.set(sid,Object.fromEntries(new FormData(form)));});
-  form.addEventListener('change',()=>{dirty=true;wordExtras.set(sid,Object.fromEntries(new FormData(form)));});
+  form.addEventListener('input',()=>{dirty=true;wordExtras.set(sid,Object.fromEntries(new FormData(form)));updatePreview();});
+  form.addEventListener('change',()=>{dirty=true;wordExtras.set(sid,Object.fromEntries(new FormData(form)));updatePreview();});
   form.onsubmit=ev=>{ev.preventDefault();run(async()=>{
     if(!wordTemplate)throw Error('Chargez d’abord le modèle Word préparé.');
     const extra=Object.fromEntries(new FormData(form));wordExtras.set(sid,extra);
